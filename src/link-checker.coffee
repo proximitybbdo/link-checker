@@ -1,8 +1,8 @@
 request = require 'request'
-jsdom = require 'jsdom'
-u = require 'url'
-l = require 'logme'
-p = require 'commander'
+jsdom   = require 'jsdom'
+u       = require 'url'
+l       = require 'logme'
+p       = require 'commander'
 
 root = exports ? this
 
@@ -44,7 +44,7 @@ root.LinkChecker = class LinkChecker
   
   check_end: ->
     @log "Check end, processing queue #{@queued.length}"
-    # @log "Queued #{@queued}"
+    @log "Queued #{@queued}"
 
     if @processed.length % 20 == 0 && !@finished
       @log "Processed #{@processed.length}"
@@ -65,25 +65,29 @@ root.LinkChecker = class LinkChecker
         content_length = parseInt(response.headers['content-length']) / 1024
         ext = url.link.split('.')[url.link.split('.').length - 1]
 
-        if content_length > 500 && ref.exclude_process.indexOf(ext) > -1
+        if content_length > 500 || ref.exclude_process.indexOf(ext) > -1
           ref.log "Too Large #{url.link} - #{content_length}Kb", LinkChecker.LOG_INFO
           ref.remove_from_queue url.link
 
           r.end()
     }, (error, response, body) ->
-      ref.remove_from_queue url.link
-
       if !error && response.statusCode == 200
-        ref_ref = ref
-       
-        if ref.valid_link(url.link) # only process page when valid hostname
+        if ref.valid_process_link(url.link) # only process page when valid hostname
           try
+            ref_ref = ref
+         
             jsdom.env {html: body, scripts: ['http://code.jquery.com/jquery-1.7.1.min.js']}, (error, window) ->
               ref_ref.process_page url.link, window.jQuery
           catch err
             ref.log "****************************** (jsdom)", LinkChecker.LOG_CRITICAL
             ref.log err, LinkChecker.LOG_CRITICAL
+
+            ref.remove_from_queue url.link
+        else
+          ref.remove_from_queue url.link
       else
+        ref.remove_from_queue url.link
+
         if !error
           ref.log "#{response.statusCode} at page #{url.current} for #{url.link}", LinkChecker.LOG_CRITICAL
 
@@ -97,10 +101,12 @@ root.LinkChecker = class LinkChecker
     @queued.splice(@queued.indexOf(url), 1) if @queued.indexOf url > -1
 
   process_page: (url, $) ->
+    @remove_from_queue url
+
     links = []
-    
+  
     $('a').each (e) -> links.push($(this).attr('href'))
-    
+
     links = @clean_up_links url, links
 
     for link in links
@@ -113,10 +119,13 @@ root.LinkChecker = class LinkChecker
   clean_up_links: (url, links) ->
     cleansed = []
 
-    cleansed = for link in links
+    for link in links
       link = @create_link link
 
-      {current: url, link: link} if cleansed.indexOf(link) < 0 && @valid_queue_link(link)
+      if cleansed.indexOf(link) < 0 && @valid_queue_link(link)
+        cleansed.push {current: url, link: link}
+
+    cleansed
 
   create_link: (link) ->
     if link.indexOf('http') < 0
@@ -124,7 +133,7 @@ root.LinkChecker = class LinkChecker
     else
       link
 
-  valid_link: (link) ->
+  valid_process_link: (link) ->
     link = u.parse link
     valid = true
 
@@ -138,7 +147,7 @@ root.LinkChecker = class LinkChecker
     valid = true
 
     switch link.protocol
-      when 'mailto:', 'javascript:'
+      when 'mailto:', 'javascript:', 'skype:'
         valid = false
    
     valid
@@ -188,8 +197,6 @@ root.run = ->
   lc.verbose = p.verbose
 
   lc.start (errors) ->
-    console.log "\n"
-    console.log 'Finished'
     console.log errors
 
 
