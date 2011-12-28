@@ -4,7 +4,6 @@
   "version": "0.0.1",
   "author": "Pieter Michels <pieter@noort.be>",
   "description": "Check links recursively for a given url",
-  "contributors": [],
   "bin": {"link-checker": "./bin/link-checker"}, 
   "main": "./lib/link-checker", 
   "repository": {
@@ -16,8 +15,8 @@
     "logme": "0.3.0",   
     "jsdom": "0.2.10",   
     "request": "2.9.3",   
-    "url": "0.4.9",   
+    "url": "0.4.9"
   }, 
   "license": "MIT",
-  "engine": {"node", ">=0.6"}
+  "engine": {"node": ">=0.6"}
 }
