@@ -12,6 +12,8 @@
   }, 
   "dependencies": {
     "commander": "0.5.1",   
+    "fs": "x",   
+    "path": "x",   
     "logme": "0.3.0",   
     "jsdom": "0.2.10",   
     "request": "2.9.3",   

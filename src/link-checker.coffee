@@ -1,8 +1,10 @@
 request = require 'request'
 jsdom   = require 'jsdom'
+fs      = require 'fs'
 u       = require 'url'
 l       = require 'logme'
 p       = require 'commander'
+path    = require 'path'
 
 root = exports ? this
 
@@ -186,7 +188,7 @@ root.LinkChecker = class LinkChecker
 
 root.run = ->
   p
-    .version('0.0.1')
+    .version(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version)
     .option('-u, --url [url]', 'URL to check')
     .option('-v, --verbose', 'Verbose')
     .parse(process.argv)
