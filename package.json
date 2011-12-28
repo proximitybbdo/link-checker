@@ -1,7 +1,7 @@
 {
   "name": "link-checker",
   "preferGlobal": "true",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Pieter Michels <pieter@noort.be>",
   "description": "Check links recursively for a given url",
   "bin": {"link-checker": "./bin/link-checker"}, 
