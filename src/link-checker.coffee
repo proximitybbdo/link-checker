@@ -91,7 +91,8 @@ root.LinkChecker = class LinkChecker
 
     @add_to_queue link
     
-    r = request {uri: link.url, onResponse: (error, response, body) ->
+    r = request { uri: link.url,
+    onResponse: (error, response, body) ->
       if !error && response.headers['connection'] != 'close'
         content_length = parseInt(response.headers['content-length']) / 1024
 
