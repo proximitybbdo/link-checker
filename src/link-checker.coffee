@@ -8,10 +8,41 @@ path    = require 'path'
 
 root = exports ? this
 
+class Link
+  constructor: (@parent, @url, @base, @code = -1) ->
+    @url = u.resolve(@base, @url) if @url.indexOf('http') < 0
+    @u = u.parse @url
+
+  valid_process_link: (base) ->
+    valid = true
+
+    if @u.hostname != u.parse(base).hostname # only links on same host
+      valid = false
+
+    valid
+
+  valid_queue_link: () ->
+    valid = true
+
+    switch @u.protocol
+      when 'mailto:', 'javascript:', 'skype:'
+        valid = false
+   
+    valid
+
+  extension: () ->
+    @url.split('.')[@url.split('.').length - 1]
+
+  to_string: () ->
+    "#{@parent} with #{@url}"
+
 root.LinkChecker = class LinkChecker
   @LOG_CRITICAL = 'critical'
   @LOG_INFO = 'info'
+
   @REGEX_EMAIL = /(http|https):\/\/([a-zA-Z0-9.]|%[0-9A-Za-z]|\/|:[0-9]?)*/
+
+  @MAX_RETRIES = 2
   
   constructor: (@base, @url = '') ->
     @log "Init"
@@ -24,7 +55,6 @@ root.LinkChecker = class LinkChecker
     @exclude_process = ['gif', 'jpg', 'pdf', 'mp3', 'swf', 'jpeg']
 
     @try = 0
-    @retries = 1
     @finished = false
 
     @end_interval_interval = 2000
@@ -36,7 +66,7 @@ root.LinkChecker = class LinkChecker
     if @base.length > 0 && LinkChecker.REGEX_EMAIL.test @base
       ref = this
       
-      @queue @create_link @url
+      @queue new Link('', @url, @base)
 
       @end_interval = setInterval ->
         ref.check_end()
@@ -54,121 +84,93 @@ root.LinkChecker = class LinkChecker
     if @queued.length == 0 && !@finished
       @finish_up()
 
-  queue: (url) ->
+  queue: (link) ->
     ref = this
-    url = {current: '', link: url} if typeof url == 'string'
 
-    @log "Queue #{url.link}"
+    @log "Queue #{link.url}"
 
-    @queued.push url.link
+    @add_to_queue link
     
-    r = request {uri: url.link, onResponse: (error, response, body) ->
+    r = request {uri: link.url, onResponse: (error, response, body) ->
       if !error && response.headers['connection'] != 'close'
         content_length = parseInt(response.headers['content-length']) / 1024
-        ext = url.link.split('.')[url.link.split('.').length - 1]
 
-        if content_length > 500 || ref.exclude_process.indexOf(ext) > -1
-          ref.log "Too Large #{url.link} - #{content_length}Kb", LinkChecker.LOG_INFO
-          ref.remove_from_queue url.link
+        if content_length > 500 || ref.exclude_process.indexOf(link.extension()) > -1
+          ref.log "Too Large #{link.url} - #{content_length}Kb", LinkChecker.LOG_INFO
+          ref.remove_from_queue link
 
           r.end()
     }, (error, response, body) ->
       if !error && response.statusCode == 200
-        if ref.valid_process_link(url.link) # only process page when valid hostname
+        if link.valid_process_link(ref.base) # only process page when valid hostname
           try
             ref_ref = ref
          
             jsdom.env {html: body, scripts: ['http://code.jquery.com/jquery-1.7.1.min.js']}, (error, window) ->
-              ref_ref.process_page url.link, window.jQuery
+              ref_ref.process_page link, window.jQuery
           catch err
             ref.log "****************************** (jsdom)", LinkChecker.LOG_CRITICAL
             ref.log err, LinkChecker.LOG_CRITICAL
 
-            ref.remove_from_queue url.link
+            ref.remove_from_queue link
         else
-          ref.remove_from_queue url.link
+          ref.remove_from_queue link
       else
-        ref.remove_from_queue url.link
+        ref.remove_from_queue link
 
         if !error
-          ref.log "#{response.statusCode} at page #{url.current} for #{url.link}", LinkChecker.LOG_CRITICAL
+          ref.log "#{response.statusCode} at #{link.to_string()}", LinkChecker.LOG_CRITICAL
 
-          ref.errored.push({current: url.current, link: url.link, code: response.statusCode})
+          link.code = response.statusCode
         else
           ref.log error, LinkChecker.LOG_CRITICAL
 
-          ref.errored.push({current: url.current, link: url.link, code: -1})
+        ref.errored.push link
 
-  remove_from_queue: (url) ->
-    @queued.splice(@queued.indexOf(url), 1) if @queued.indexOf url > -1
+  remove_from_queue: (link) ->
+    @queued.splice(@queued.indexOf(link.url), 1) if @queued.indexOf link.url > -1
 
-  process_page: (url, $) ->
-    @remove_from_queue url
+  add_to_queue: (link) ->
+    @queued.push link.url
+
+  process_page: (parent, $) ->
+    @remove_from_queue parent.url
 
     links = []
-  
-    $('a').each (e) -> links.push($(this).attr('href'))
+    ref = this
+    
+    $('a').each (e) -> links.push(new Link(parent.url, $(this).attr('href'), ref.base))
 
-    links = @clean_up_links url, links
+    links = @clean_up_fetched_links links
 
     for link in links
-      @process_link link if @processed.indexOf(link.link) < 0
+      @process_link link if @processed.indexOf(link.url) < 0
 
   process_link: (link) ->
-    @processed.push link.link
+    @processed.push link.url
     @queue link
 
-  clean_up_links: (url, links) ->
+  clean_up_fetched_links: (links) ->
     cleansed = []
 
     for link in links
-      link = @create_link link
-
-      if cleansed.indexOf(link) < 0 && @valid_queue_link(link)
-        cleansed.push {current: url, link: link}
+      cleansed.push(link) if cleansed.indexOf(link) < 0 && link.valid_queue_link()
 
     cleansed
-
-  create_link: (link) ->
-    if link.indexOf('http') < 0
-      u.resolve(@base, link)
-    else
-      link
-
-  valid_process_link: (link) ->
-    link = u.parse link
-    valid = true
-
-    if link.hostname != u.parse(@base).hostname # only links on same host
-      valid = false
-
-    valid
-
-  valid_queue_link: (link) ->
-    link = u.parse link
-    valid = true
-
-    switch link.protocol
-      when 'mailto:', 'javascript:', 'skype:'
-        valid = false
-   
-    valid
 
   finish_up: ->
     @finished = true
 
-    @log "Finish up", LinkChecker.INFO
     @log "Error: #{@errored.length}, retry: #{@try}", LinkChecker.INFO
     @log "Processed: #{@processed.length}", LinkChecker.INFO
 
     clearInterval @end_interval
 
-    if @errored.length > 0 && @try <= @retries
-      ref = this
+    if @errored.length > 0 && @try <= LinkChecker.MAX_RETRIES
       retries = []
 
       for link in @errored
-        retries.push(ref.queue(link)) if "#{link.code}".substr(0, 1) == "5"
+        retries.push(@queue link) if "#{link.code}".substr(0, 1) == "5"
 
       if retries.length > 0
         @log "Retrying for #{@errored.length} links", LinkChecker.INFO
