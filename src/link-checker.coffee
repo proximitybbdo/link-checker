@@ -62,8 +62,8 @@ root.LinkChecker = class LinkChecker
 
   start: (@callback) ->
     @log "Start (verbose: " + @verbose + ")"
-
-    if @base.length > 0 && LinkChecker.REGEX_EMAIL.test @base
+    
+    if @base != undefined && @base.length > 0 && LinkChecker.REGEX_EMAIL.test @base
       ref = this
       
       @queue new Link('', @url, @base)
@@ -72,25 +72,20 @@ root.LinkChecker = class LinkChecker
         ref.check_end()
       , @end_interval_interval
     else
-      @log "Invalid url (#{@base}) given", LinkChecker.LOG_CRITICAL
-  
+      throw new Error("No valid base url given")
+ 
   check_end: ->
-    @log "Check end, processing queue #{@queued.length}"
-    @log "Queued #{@queued}"
-
-    if @processed.length % 20 == 0 && !@finished
-      @log "Processed #{@processed.length}"
-
     if @queued.length == 0 && !@finished
       @finish_up()
+    else
+      @log "Queued #{@queued.length} - Processed #{@processed.length}"
 
   queue: (link) ->
-    ref = this
-
     @log "Queue #{link.url}"
 
     @add_to_queue link
     
+    ref = this
     r = request { uri: link.url,
     onResponse: (error, response, body) ->
       if !error && response.headers['connection'] != 'close'
@@ -140,7 +135,8 @@ root.LinkChecker = class LinkChecker
     links = []
     ref = this
     
-    $('a').each (e) -> links.push(new Link(parent.url, $(this).attr('href'), ref.base))
+    $('a').each (e) ->
+      links.push(new Link(parent.url, $(this).attr('href'), ref.base))
 
     links = @clean_up_fetched_links links
 
@@ -160,12 +156,11 @@ root.LinkChecker = class LinkChecker
     cleansed
 
   finish_up: ->
-    @finished = true
-
     @log "Error: #{@errored.length}, retry: #{@try}", LinkChecker.INFO
     @log "Processed: #{@processed.length}", LinkChecker.INFO
 
     clearInterval @end_interval
+    @finished = true
 
     if @errored.length > 0 && @try <= LinkChecker.MAX_RETRIES
       retries = []
@@ -190,18 +185,26 @@ root.LinkChecker = class LinkChecker
       l.log(state, msg)
 
 root.run = ->
+  package = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json')))
+
   p
-    .version(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version)
+    .version("#{package.name} #{package.version}")
     .option('-u, --url [url]', 'URL to check')
     .option('-v, --verbose', 'Verbose')
     .parse(process.argv)
 
-  console.log "LinkChecker CLI (#{p._version})"
+  process.title = package.name
 
   lc = new LinkChecker(p.url)
   lc.verbose = p.verbose
 
-  lc.start (errors) ->
-    console.log errors
+  try
+    lc.start (errors) ->
+      console.log errors
 
+      process.exit(1)
+  catch error
+    console.log error
 
+# process.on 'uncaughtException', (err) ->
+#   console.error('uncaughtexception:' + err.stack)

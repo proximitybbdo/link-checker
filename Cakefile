@@ -25,6 +25,6 @@ task 'test', 'build and test', (options) ->
 
   options.url or= 'http://www.whatsnextmagazine.net'
 
-  lc = exec "./bin/link-checker -u #{options.url} -v"
+  lc = exec "./bin/link-checker -v -u #{options.url}"
   lc.stdout.pipe process.stdout
   lc.stderr.pipe process.stderr
