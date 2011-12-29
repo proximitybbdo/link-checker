@@ -12,6 +12,7 @@ class Link
   constructor: (@parent, @url, @base, @code = -1) ->
     @url = u.resolve(@base, @url) if @url.indexOf('http') < 0
     @u = u.parse @url
+    @request = null
 
   valid_process_link: (base) ->
     valid = true
@@ -30,6 +31,11 @@ class Link
    
     valid
 
+  kill_request: () ->
+    if @request
+      @request.end()
+      @request = null
+
   extension: () ->
     @url.split('.')[@url.split('.').length - 1]
 
@@ -43,6 +49,8 @@ root.LinkChecker = class LinkChecker
   @REGEX_EMAIL = /(http|https):\/\/([a-zA-Z0-9.]|%[0-9A-Za-z]|\/|:[0-9]?)*/
 
   @MAX_RETRIES = 2
+
+  @JQUERY = 'http://code.jquery.com/jquery-1.7.1.min.js'
   
   constructor: (@base, @url = '') ->
     @log "Init"
@@ -64,12 +72,12 @@ root.LinkChecker = class LinkChecker
     @log "Start (verbose: " + @verbose + ")"
     
     if @base != undefined && @base.length > 0 && LinkChecker.REGEX_EMAIL.test @base
-      ref = this
-      
-      @queue new Link('', @url, @base)
+      link = new Link('', @url, @base)
 
-      @end_interval = setInterval ->
-        ref.check_end()
+      @queue link
+
+      @end_interval = setInterval =>
+        @check_end()
       , @end_interval_interval
     else
       throw new Error("No valid base url given")
@@ -79,58 +87,58 @@ root.LinkChecker = class LinkChecker
       @finish_up()
     else
       @log "Queued #{@queued.length} - Processed #{@processed.length}"
+      @log "Queued #{@queued}"
 
   queue: (link) ->
-    @log "Queue #{link.url}"
-
+    @log "Queue #{link.url} (#{typeof link})"
+    
     @add_to_queue link
     
-    ref = this
-    r = request { uri: link.url,
-    onResponse: (error, response, body) ->
+    link.request = request { uri: link.url, timeout: 20 * 1000,
+    onResponse: (error, response, body) =>
       if !error && response.headers['connection'] != 'close'
         content_length = parseInt(response.headers['content-length']) / 1024
 
-        if content_length > 500 || ref.exclude_process.indexOf(link.extension()) > -1
-          ref.log "Too Large #{link.url} - #{content_length}Kb", LinkChecker.LOG_INFO
-          ref.remove_from_queue link
-
-          r.end()
-    }, (error, response, body) ->
+        if content_length > 500 || @exclude_process.indexOf(link.extension()) > -1
+          @log "Too Large #{link.url} - #{content_length}Kb", LinkChecker.LOG_INFO
+          @remove_from_queue link
+    }, (error, response, body) =>
       if !error && response.statusCode == 200
-        if link.valid_process_link(ref.base) # only process page when valid hostname
+        link.code = response.statusCode
+
+        if link.valid_process_link(@base) # only process page when valid hostname
           try
-            ref_ref = ref
-         
-            jsdom.env {html: body, scripts: ['http://code.jquery.com/jquery-1.7.1.min.js']}, (error, window) ->
-              ref_ref.process_page link, window.jQuery
+            jsdom.env {html: body, scripts: [LinkChecker.JQUERY]}, (error, window) =>
+              @process_page link, window.jQuery
           catch err
-            ref.log "****************************** (jsdom)", LinkChecker.LOG_CRITICAL
-            ref.log err, LinkChecker.LOG_CRITICAL
+            @log "****************************** (jsdom)", LinkChecker.LOG_CRITICAL
+            @log err, LinkChecker.LOG_CRITICAL
 
-            ref.remove_from_queue link
+            @remove_from_queue link
         else
-          ref.remove_from_queue link
+          @remove_from_queue link
       else
-        ref.remove_from_queue link
-
         if !error
-          ref.log "#{response.statusCode} at #{link.to_string()}", LinkChecker.LOG_CRITICAL
+          @log "#{response.statusCode} at #{link.to_string()}", LinkChecker.LOG_CRITICAL
 
           link.code = response.statusCode
         else
-          ref.log error, LinkChecker.LOG_CRITICAL
+          @log error, LinkChecker.LOG_CRITICAL
 
-        ref.errored.push link
+        @errored.push link
+
+        @remove_from_queue link
 
   remove_from_queue: (link) ->
     @queued.splice(@queued.indexOf(link.url), 1) if @queued.indexOf link.url > -1
+   
+    link.kill_request()
 
   add_to_queue: (link) ->
     @queued.push link.url
 
   process_page: (parent, $) ->
-    @remove_from_queue parent.url
+    @remove_from_queue parent
 
     links = []
     ref = this
