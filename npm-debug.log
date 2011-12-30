@@ -1,0 +1,540 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'node-inspector' ]
+info using npm@1.1.0-alpha-2
+info using node@v0.6.6
+verbose /usr/local/bin/node node symlink
+verbose config file /Users/pieterm/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+silly exec /usr/local/bin/node "/usr/local/lib/node_modules/npm/bin/npm-get-uid-gid.js" "nobody" 145724160
+silly spawning [ '/usr/local/bin/node',
+silly spawning   [ '/usr/local/lib/node_modules/npm/bin/npm-get-uid-gid.js',
+silly spawning     'nobody',
+silly spawning     145724160 ],
+silly spawning   null ]
+silly output from getuid/gid {"uid":-2,"gid":145724160}
+silly output from getuid/gid 
+verbose into /usr/local/lib [ 'node-inspector' ]
+verbose cache add node-inspector
+verbose cache add [ 'node-inspector', null ]
+silly cache add: name, spec, args [ undefined, 'node-inspector', [ 'node-inspector', null ] ]
+verbose parsed url { pathname: 'node-inspector',
+verbose parsed url   path: 'node-inspector',
+verbose parsed url   href: 'node-inspector' }
+info addNamed [ 'node-inspector', '' ]
+verbose addNamed [ null, '' ]
+verbose GET node-inspector
+verbose raw, before any munging node-inspector
+verbose url resolving [ 'https://registry.npmjs.org/', './node-inspector' ]
+verbose url resolved https://registry.npmjs.org/node-inspector
+verbose etag "6A49KP4R6C8HOB50CVW5JKKIZ"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B04)',
+silly get cb     etag: '"6A49KP4R6C8HOB50CVW5JKKIZ"',
+silly get cb     date: 'Fri, 30 Dec 2011 09:58:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag node-inspector from cache
+verbose GET node-inspector/0.1.10
+verbose raw, before any munging node-inspector/0.1.10
+verbose url resolving [ 'https://registry.npmjs.org/', './node-inspector/0.1.10' ]
+verbose url resolved https://registry.npmjs.org/node-inspector/0.1.10
+verbose etag "6A49KP4R6C8HOB50CVW5JKKIZ"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B04)',
+silly get cb     etag: '"6A49KP4R6C8HOB50CVW5JKKIZ"',
+silly get cb     date: 'Fri, 30 Dec 2011 09:59:00 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag node-inspector/0.1.10 from cache
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8l-v83.6.6.14-darwin-x64-10.8.0',
+verbose bin dist   { shasum: '92520889108761231acd20fecd9f04e297e563e2',
+verbose bin dist     tarball: 'http://registry.npmjs.org/node-inspector/-/node-inspector-0.1.10.tgz' } ]
+verbose caching /Users/pieterm/.npm/node-inspector/0.1.10/package/package.json
+verbose loadDefaults node-inspector@0.1.10
+silly resolved [ { name: 'node-inspector',
+silly resolved     version: '0.1.10',
+silly resolved     description: 'Web Inspector based nodeJS debugger',
+silly resolved     homepage: 'http://github.com/dannycoates/node-inspector',
+silly resolved     author: { name: 'Danny Coates', email: 'dannycoates@gmail.com' },
+silly resolved     keywords: [ 'debug', 'debugger', 'inspector', 'profiler' ],
+silly resolved     repository: 
+silly resolved      { type: 'git',
+silly resolved        url: 'git://github.com/dannycoates/node-inspector.git' },
+silly resolved     engines: { node: '>=0.3.0' },
+silly resolved     bin: { 'node-inspector': './bin/inspector.js' },
+silly resolved     dependencies: { 'socket.io': '~0.8.2', paperboy: '~0.0.2' },
+silly resolved     _npmUser: { name: 'pierot', email: 'pieter@noort.be' },
+silly resolved     _id: 'node-inspector@0.1.10',
+silly resolved     devDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.0-alpha-2',
+silly resolved     _nodeVersion: 'v0.6.6',
+silly resolved     _defaultsLoaded: true,
+silly resolved     scripts: {} } ]
+info into /usr/local/lib node-inspector@0.1.10
+info installOne node-inspector@0.1.10
+info unbuild /usr/local/lib/node_modules/node-inspector
+verbose from cache /Users/pieterm/.npm/node-inspector/0.1.10/package/package.json
+verbose mkdir (expected) error ENOENT, no such file or directory '/usr/local/lib/node_modules/___node-inspector.npm'
+verbose mkdir done: /usr/local/lib/node_modules/___node-inspector.npm 755
+verbose unpack_ uid, gid [ -2, 145724160 ]
+verbose unpackTarget /usr/local/lib/node_modules/node-inspector
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar undefined
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/.gitignore
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/ChangeLog
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/config.json
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/package.json
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/readme.md
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/bin
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/bin/inspector.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/lib
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/lib/callback.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/lib/debug-server.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/lib/debugger.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/lib/session.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/test
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/test/hello.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ApplicationCacheItemsView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/AuditCategories.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/AuditFormatters.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/AuditLauncherView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/AuditResultView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/AuditRules.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/audits.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/AuditsPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/BottomUpProfileDataGridTree.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/BreakpointManager.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/BreakpointsSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Callback.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/CallStackSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ChangesView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Checkbox.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Color.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ConsolePanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ConsoleView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ContextMenu.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/CookieItemsView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/CookieParser.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/CookiesTable.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/CSSCompletions.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/CSSStyleModel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Database.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DatabaseQueryView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DatabaseTableView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DataGrid.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DOMAgent.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DOMStorage.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DOMStorageItemsView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/DOMSyntaxHighlighter.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Drawer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ElementsPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ElementsTreeOutline.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/EventListenersSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ExtensionAPI.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ExtensionAuditCategory.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ExtensionCommon.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ExtensionPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ExtensionRegistryStub.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ExtensionServer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/FileSystemView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/FontView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/goToLineDialog.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/GoToLineDialog.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/HAREntry.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/heapProfiler.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/HeapSnapshotView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/helpScreen.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/HelpScreen.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ImageView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/index.html
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/InjectedFakeWorker.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/InjectedScript.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/InjectedScriptAccess.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/inspector.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/inspector.html
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/inspector.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/InspectorBackendStub.qrc
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/InspectorFrontendHostStub.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/inspectorSyntaxHighlight.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/KeyboardShortcut.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/MetricsSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/NetworkItemView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/networkPanel.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/NetworkPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Object.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ObjectPropertiesSection.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Panel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/PanelEnablerView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Placard.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/popover.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Popover.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ProfileDataGridTree.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ProfilesPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ProfileView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/PropertiesSection.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/PropertiesSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/RemoteObject.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Resource.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourceCategory.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourceCookiesView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourceHeadersView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourceManager.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourcesPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourceTimingView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ResourceView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ScopeChainSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Script.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ScriptsPanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ScriptView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Section.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Settings.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/ShortcutsHelp.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SidebarTreeElement.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceCSSTokenizer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceCSSTokenizer.re2js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceFrame.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceHTMLTokenizer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceHTMLTokenizer.re2js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceJavaScriptTokenizer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceJavaScriptTokenizer.re2js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceTokenizer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SourceView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/StatusBarButton.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/StylesSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/SummaryBar.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TabbedPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TestController.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TextEditorHighlighter.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TextEditorModel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TextPrompt.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/textViewer.css
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TextViewer.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TimelineAgent.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TimelineGrid.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TimelineOverviewPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TimelinePanel.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/TopDownProfileDataGridTree.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/treeoutline.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/utilities.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/View.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/WatchExpressionsSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/WebKit.qrc
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/WelcomeView.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/WorkersSidebarPane.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/node
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/node/InspectorBackendStub.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/node/InspectorFrontendHostStub.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/node/Overrides.js
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/applicationCache.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/auditsIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/back.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/breakpointBorder.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/breakpointConditionalBorder.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/breakpointConditionalCounterBorder.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/breakpointCounterBorder.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/breakpointsActivateButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/breakpointsDeactivateButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/checker.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/clearConsoleButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/closeButtons.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/consoleButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/consoleIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/cookie.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/database.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/databaseTable.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/debuggerContinue.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/debuggerPause.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/debuggerStepInto.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/debuggerStepOut.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/debuggerStepOver.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallDown.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallDownBlack.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallDownWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallRight.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallRightBlack.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallRightDown.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallRightDownBlack.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallRightDownWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/disclosureTriangleSmallRightWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/dockButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/elementsIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/enableOutlineButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/enableSolidButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/errorIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/errorMediumIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/errorRedDot.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/excludeButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/focusButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/forward.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/frame.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/gearButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/glossyHeader.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/glossyHeaderPressed.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/glossyHeaderSelected.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/glossyHeaderSelectedPressed.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/goArrow.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/graphLabelCalloutLeft.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/graphLabelCalloutRight.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/largerResourcesButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/localStorage.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/networkIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/nodeSearchButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/paneAddButtons.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/paneBottomGrow.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/paneBottomGrowActive.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/paneGrowHandleLine.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/paneSettingsButtons.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/pauseOnExceptionButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/percentButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/popoverArrows.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/popoverBackground.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/profileGroupIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/profileIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/profilesIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/profileSmallIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/profilesSilhouette.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/programCounterBorder.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/radioDot.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/recordButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/recordToggledButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/reloadButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourceCSSIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourceDocumentIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourceDocumentIconSmall.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourceJSIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourcePlainIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourcePlainIconSmall.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourcesIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourcesSizeGraphIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/resourcesTimeGraphIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/scriptsIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/scriptsSilhouette.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/searchSmallBlue.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/searchSmallBrightBlue.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/searchSmallGray.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/searchSmallWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/segment.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/segmentEnd.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/segmentHover.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/segmentHoverEnd.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/segmentSelected.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/segmentSelectedEnd.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/sessionStorage.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/spinner.gif
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/splitviewDimple.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/splitviewDividerBackground.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarBackground.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarBottomBackground.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarButtons.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarMenuButton.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarMenuButtonSelected.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarResizerHorizontal.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/statusbarResizerVertical.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/successGreenDot.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/thumbActiveHoriz.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/thumbActiveVert.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/thumbHoriz.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/thumbHoverHoriz.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/thumbHoverVert.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/thumbVert.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarBlue.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarGray.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarGreen.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarOrange.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarPurple.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarRed.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineBarYellow.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineCheckmarks.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineDots.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillBlue.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillGray.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillGreen.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillOrange.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillPurple.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillRed.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineHollowPillYellow.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelineIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillBlue.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillGray.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillGreen.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillOrange.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillPurple.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillRed.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/timelinePillYellow.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/toolbarItemSelected.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/trackHoriz.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/trackVert.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/treeDownTriangleBlack.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/treeDownTriangleWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/treeRightTriangleBlack.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/treeRightTriangleWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/treeUpTriangleBlack.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/treeUpTriangleWhite.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/undockButtonGlyph.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/userInputIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/userInputPreviousIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/userInputResultIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/warningIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/warningMediumIcon.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/warningOrangeDot.png
+silly asyncMap in gTP /usr/local/lib/node_modules/___node-inspector.npm/package/front-end/Images/warningsErrors.png
+verbose gunzed /usr/local/lib/node_modules/___node-inspector.npm/package
+verbose rm'ed /usr/local/lib/node_modules/node-inspector
+verbose renamed [ '/usr/local/lib/node_modules/___node-inspector.npm/package',
+verbose renamed   '/usr/local/lib/node_modules/node-inspector' ]
+verbose caching /usr/local/lib/node_modules/node-inspector/package.json
+verbose loadDefaults node-inspector@0.1.10
+info preinstall node-inspector@0.1.10
+verbose from cache /usr/local/lib/node_modules/node-inspector/package.json
+verbose into /usr/local/lib/node_modules/node-inspector [ 'socket.io@~0.8.2', 'paperboy@~0.0.2' ]
+verbose cache add socket.io@~0.8.2
+verbose cache add [ 'socket.io@~0.8.2', null ]
+silly cache add: name, spec, args [ undefined, 'socket.io@~0.8.2', [ 'socket.io@~0.8.2', null ] ]
+verbose parsed url { pathname: 'socket.io@~0.8.2',
+verbose parsed url   path: 'socket.io@~0.8.2',
+verbose parsed url   href: 'socket.io@~0.8.2' }
+silly cache add: name, spec, args [ 'socket.io', '~0.8.2', [ 'socket.io', '~0.8.2' ] ]
+verbose parsed url { pathname: '~0.8.2', path: '~0.8.2', href: '~0.8.2' }
+info addNamed [ 'socket.io', '~0.8.2' ]
+verbose addNamed [ null, '>=0.8.2- <0.9.0-' ]
+verbose cache add paperboy@~0.0.2
+verbose cache add [ 'paperboy@~0.0.2', null ]
+silly cache add: name, spec, args [ undefined, 'paperboy@~0.0.2', [ 'paperboy@~0.0.2', null ] ]
+verbose parsed url { pathname: 'paperboy@~0.0.2',
+verbose parsed url   path: 'paperboy@~0.0.2',
+verbose parsed url   href: 'paperboy@~0.0.2' }
+silly cache add: name, spec, args [ 'paperboy', '~0.0.2', [ 'paperboy', '~0.0.2' ] ]
+verbose parsed url { pathname: '~0.0.2', path: '~0.0.2', href: '~0.0.2' }
+info addNamed [ 'paperboy', '~0.0.2' ]
+verbose addNamed [ null, '>=0.0.2- <0.1.0-' ]
+verbose GET paperboy
+verbose raw, before any munging paperboy
+verbose url resolving [ 'https://registry.npmjs.org/', './paperboy' ]
+verbose url resolved https://registry.npmjs.org/paperboy
+verbose etag "96B1ABGDMLF3KFU1RLJHA177M"
+verbose GET socket.io
+verbose raw, before any munging socket.io
+verbose url resolving [ 'https://registry.npmjs.org/', './socket.io' ]
+verbose url resolved https://registry.npmjs.org/socket.io
+verbose etag "1Y4PUAZVDNUJWBTEOT3D3ZMVR"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B04)',
+silly get cb     etag: '"96B1ABGDMLF3KFU1RLJHA177M"',
+silly get cb     date: 'Fri, 30 Dec 2011 09:59:01 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag paperboy from cache
+verbose GET paperboy/0.0.3
+verbose raw, before any munging paperboy/0.0.3
+verbose url resolving [ 'https://registry.npmjs.org/', './paperboy/0.0.3' ]
+verbose url resolved https://registry.npmjs.org/paperboy/0.0.3
+verbose etag "96B1ABGDMLF3KFU1RLJHA177M"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B04)',
+silly get cb     etag: '"1Y4PUAZVDNUJWBTEOT3D3ZMVR"',
+silly get cb     date: 'Fri, 30 Dec 2011 09:59:01 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag socket.io from cache
+verbose GET socket.io/0.8.7
+verbose raw, before any munging socket.io/0.8.7
+verbose url resolving [ 'https://registry.npmjs.org/', './socket.io/0.8.7' ]
+verbose url resolved https://registry.npmjs.org/socket.io/0.8.7
+verbose etag "1Y4PUAZVDNUJWBTEOT3D3ZMVR"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B04)',
+silly get cb     etag: '"96B1ABGDMLF3KFU1RLJHA177M"',
+silly get cb     date: 'Fri, 30 Dec 2011 09:59:02 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag paperboy/0.0.3 from cache
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8l-v83.6.6.14-darwin-x64-10.8.0',
+verbose bin dist   { shasum: 'c60489770c2b5eb2d4a447ff135e3d48a18c5dd5',
+verbose bin dist     tarball: 'http://registry.npmjs.org/paperboy/-/paperboy-0.0.3.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/paperboy/-/paperboy-0.0.3.tgz',
+verbose addRemoteTarball   'c60489770c2b5eb2d4a447ff135e3d48a18c5dd5' ]
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1325239142542'
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B04)',
+silly get cb     etag: '"1Y4PUAZVDNUJWBTEOT3D3ZMVR"',
+silly get cb     date: 'Fri, 30 Dec 2011 09:59:02 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag socket.io/0.8.7 from cache
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8l-v83.6.6.14-darwin-x64-10.8.0',
+verbose bin dist   { shasum: '98419cb68859a6fc5ec8d49f50dcdbbe2ffd4466',
+verbose bin dist     tarball: 'http://registry.npmjs.org/socket.io/-/socket.io-0.8.7.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/socket.io/-/socket.io-0.8.7.tgz',
+verbose addRemoteTarball   '98419cb68859a6fc5ec8d49f50dcdbbe2ffd4466' ]
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1325239142542/1325239142542-0.17407636437565088'
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1325239142542/1325239142575-0.9245299864560366'
+verbose mkdir done: /tmp/npm-1325239142542/1325239142542-0.17407636437565088 755
+verbose mkdir done: /tmp/npm-1325239142542/1325239142575-0.9245299864560366 755
+info fetch https://registry.npmjs.org/paperboy/-/paperboy-0.0.3.tgz
+verbose fetch to /tmp/npm-1325239142542/1325239142542-0.17407636437565088/tmp.tgz
+info fetch https://registry.npmjs.org/socket.io/-/socket.io-0.8.7.tgz
+verbose fetch to /tmp/npm-1325239142542/1325239142575-0.9245299864560366/tmp.tgz
+silly updated sha bytes 40960
+silly updated sha bytes 30720
+info shasum 98419cb68859a6fc5ec8d49f50dcdbbe2ffd4466
+info shasum /tmp/npm-1325239142542/1325239142575-0.9245299864560366/tmp.tgz
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1325239142542/1325239142575-0.9245299864560366/___package.npm'
+verbose mkdir done: /tmp/npm-1325239142542/1325239142575-0.9245299864560366/___package.npm 755
+verbose unpack_ uid, gid [ 1716622812, 1457241606 ]
+verbose unpackTarget /tmp/npm-1325239142542/1325239142575-0.9245299864560366/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 10240
+info shasum c60489770c2b5eb2d4a447ff135e3d48a18c5dd5
+info shasum /tmp/npm-1325239142542/1325239142542-0.17407636437565088/tmp.tgz
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1325239142542/1325239142542-0.17407636437565088/___package.npm'
+verbose mkdir done: /tmp/npm-1325239142542/1325239142542-0.17407636437565088/___package.npm 755
+verbose unpack_ uid, gid [ 1716622812, 1457241606 ]
+verbose unpackTarget /tmp/npm-1325239142542/1325239142542-0.17407636437565088/package
+silly gunzTarPerm modes [ '755', '644' ]
+ERR! Failed unpacking /tmp/npm-1325239142542/1325239142542-0.17407636437565088/tmp.tgz
+ERR! couldn't unpack /tmp/npm-1325239142542/1325239142542-0.17407636437565088/tmp.tgz to /tmp/npm-1325239142542/1325239142542-0.17407636437565088
+verbose about to build /usr/local/lib/node_modules/node-inspector
+ERR! error installing node-inspector@0.1.10 Error: write() after end()
+ERR! error installing node-inspector@0.1.10     at decorate (/usr/local/lib/node_modules/npm/node_modules/fstream/lib/abstract.js:64:36)
+ERR! error installing node-inspector@0.1.10     at Extract.error (/usr/local/lib/node_modules/npm/node_modules/fstream/lib/abstract.js:58:12)
+ERR! error installing node-inspector@0.1.10     at Extract.write (/usr/local/lib/node_modules/npm/node_modules/tar/lib/parse.js:71:17)
+ERR! error installing node-inspector@0.1.10     at Unzip.ondata (stream.js:38:26)
+ERR! error installing node-inspector@0.1.10     at Unzip.emit (events.js:67:17)
+ERR! error installing node-inspector@0.1.10     at Object.callback (zlib.js:366:12)
+info unbuild /usr/local/lib/node_modules/node-inspector
+verbose from cache /usr/local/lib/node_modules/node-inspector/package.json
+info preuninstall node-inspector@0.1.10
+info uninstall node-inspector@0.1.10
+verbose unbuild node-inspector@0.1.10 [ true,
+verbose unbuild node-inspector@0.1.10   '/usr/local/lib/node_modules',
+verbose unbuild node-inspector@0.1.10   '/usr/local/lib/node_modules' ]
+verbose binRoot [ '/usr/local/bin', { 'node-inspector': './bin/inspector.js' } ]
+info postuninstall node-inspector@0.1.10
+verbose installOne cb node-inspector@0.1.10
+ERR! Error: write() after end()
+ERR!     at decorate (/usr/local/lib/node_modules/npm/node_modules/fstream/lib/abstract.js:64:36)
+ERR!     at Extract.error (/usr/local/lib/node_modules/npm/node_modules/fstream/lib/abstract.js:58:12)
+ERR!     at Extract.write (/usr/local/lib/node_modules/npm/node_modules/tar/lib/parse.js:71:17)
+ERR!     at Unzip.ondata (stream.js:38:26)
+ERR!     at Unzip.emit (events.js:67:17)
+ERR!     at Object.callback (zlib.js:366:12)
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Darwin 10.8.0
+ERR! command "node" "/usr/local/bin/npm" "install" "-g" "node-inspector"
+ERR! cwd /Volumes/data/Users/pieterm/Documents/Devel/node/linkchecker
+ERR! node -v v0.6.6
+ERR! npm -v 1.1.0-alpha-2
+ERR! fstream_class Extract
+ERR! message write() after end()
+ERR! fstream_stack Extract.write (/usr/local/lib/node_modules/npm/node_modules/tar/lib/parse.js:71:17)
+ERR! fstream_stack Unzip.ondata (stream.js:38:26)
+ERR! fstream_stack Unzip.emit (events.js:67:17)
+ERR! fstream_stack Object.callback (zlib.js:366:12)
+verbose exit [ 1, true ]

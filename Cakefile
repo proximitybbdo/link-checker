@@ -13,6 +13,14 @@ task 'viewjs', 'view compiled js file', (options) ->
 
   invoke 'build'
 
+  cat = exec 'cat lib/link-logger.js'
+  cat.stdout.pipe process.stdout
+  cat.stderr.pipe process.stderr
+
+  cat = exec 'cat lib/link.js'
+  cat.stdout.pipe process.stdout
+  cat.stderr.pipe process.stderr
+
   cat = exec 'cat lib/link-checker.js'
   cat.stdout.pipe process.stdout
   cat.stderr.pipe process.stderr
