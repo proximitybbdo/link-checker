@@ -71,22 +71,22 @@ root.LinkChecker = class LinkChecker
     @add_to_queue link
     
     try
-      link.request = request {
-      uri: link.url,
-      timeout: 15 * 1000, # 15s
-      maxRedirects: 0,
-      maxSockets: 0,
+      request_o = {
+        uri: link.url,
+        timeout: 15 * 1000, # 15s
+        maxRedirects: 0,
+        maxSockets: 0,
+        onResponse: (error, response, body) =>
+          if !error && response.headers['connection'] != 'close'
+            content_length = parseInt(parseInt(response.headers['content-length']) / 1024)
 
-      onResponse: (error, response, body) =>
-        if !error && response.headers['connection'] != 'close'
-          content_length = parseInt(parseInt(response.headers['content-length']) / 1024)
+            if content_length > 500 || @exclude_process.indexOf(link.extension()) > -1
+              ll.log "Too Large #{link.url} - #{content_length}Kb", LinkLogger.LOG_INFO
+              
+              @remove_from_queue link
+      }
 
-          if content_length > 500 || @exclude_process.indexOf(link.extension()) > -1
-            ll.log "Too Large #{link.url} - #{content_length}Kb", LinkLogger.LOG_INFO
-            
-            @remove_from_queue link
-
-      }, (error, response, body) =>
+      link.request = request request_o, (error, response, body) =>
         if !error && response.statusCode == 200
           link.code = response.statusCode
 
@@ -207,6 +207,8 @@ root.run = ->
   p
     .version("#{package.name} #{package.version}")
     .option('-u, --url [url]', 'URL to check')
+    .option('-f, --full', 'Full output, default is only http codes >= 400')
+    .option('-p, --piped', 'Piped output, default is json')
     .option('-v, --verbose', 'Verbose')
     .parse(process.argv)
 
@@ -217,10 +219,17 @@ root.run = ->
 
   try
     lc.start (errors) ->
-      console.log errors
-
       for error in errors
-        console.log(error.piped_output())
+        if p.full
+          if p.piped
+            console.log error.piped_output()
+          else
+            console.log error
+        else if error.is_error()
+          if p.piped
+            console.log error.piped_output()
+          else
+            console.log error
 
       process.exit(1)
   catch error

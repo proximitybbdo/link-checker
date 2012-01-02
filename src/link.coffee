@@ -2,6 +2,9 @@ u = require 'url'
 
 root = exports ? this
 
+###
+Link model
+###
 root.Link = class Link
   @REGEX_URL = /(http|https):\/\/([a-zA-Z0-9.]|%[0-9A-Za-z]|\/|:[0-9]?)*/
 
@@ -12,9 +15,17 @@ root.Link = class Link
     @error = null
     @u = null
 
+  ###
+  Make url parse ready
+  ###
   init_url_parser: () ->
     @u = u.parse @url if !@u?
-
+  
+  ###
+  Is it a valid process link
+  Base on hostname, we don't want to go outside given domain
+  We don't want to check the internetz
+  ###
   valid_process_link: (base) ->
     valid = true
 
@@ -24,7 +35,12 @@ root.Link = class Link
       valid = false
 
     valid
-
+  
+  ###
+  It is a url?
+  Is it the right protocol
+  We don't want the anchor link of the parent page to be fetched
+  ###
   valid_queue_link: () ->
     valid = true
 
@@ -43,6 +59,10 @@ root.Link = class Link
 
     valid
 
+  ###
+  Kill request instance of this link
+  And kill the parser while we're at it
+  ###
   kill_request: () ->
     if @request?
       @request.end()
@@ -51,11 +71,26 @@ root.Link = class Link
     if @u?
       @u = null
 
+  ###
+  Link extension
+  ###
   extension: () ->
     @url.split('.')[@url.split('.').length - 1]
 
+  ###
+  Output
+  ###
   to_string: () ->
     "#{@parent} with #{@url}"
 
+  ###
+  Erroneous code
+  ###
+  is_error: () ->
+    @code >= 400
+
+  ###
+  Piped output for cli usage
+  ###
   piped_output: () ->
     "#{@code}|#{@url}"
