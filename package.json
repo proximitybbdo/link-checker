@@ -12,12 +12,11 @@
   }, 
   "dependencies": {
     "commander": "0.5.1",   
-    "fs": "x",   
-    "path": "x",   
     "logme": "0.3.0",   
     "jsdom": "0.2.10",   
     "request": "2.9.3",   
-    "url": "0.4.9"
+    "url": "0.4.9",
+    "jasmine-node": "x"
   }, 
   "license": "MIT",
   "engine": {"node": ">=0.6"}

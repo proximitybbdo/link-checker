@@ -11,6 +11,9 @@ LinkLogger = require('./link-logger').LinkLogger
 
 ll = LinkLogger
 
+###
+Link Checker
+###
 root.LinkChecker = class LinkChecker
   @MAX_RETRIES = 2
 
@@ -60,7 +63,6 @@ root.LinkChecker = class LinkChecker
       @finish_up()
     else
       ll.log "Queued #{@queued.length} - Processed #{@processed.length}"
-      # ll.log "Queued #{@queued}"
 
   ###
   Queue link and initiate request
@@ -69,7 +71,7 @@ root.LinkChecker = class LinkChecker
     ll.log "Queue #{link.url}" #  (#{typeof link})"
     
     @add_to_queue link
-    
+
     try
       request_o = {
         uri: link.url,
@@ -77,37 +79,48 @@ root.LinkChecker = class LinkChecker
         maxRedirects: 0,
         maxSockets: 0,
         onResponse: (error, response, body) =>
-          if !error && response.headers['connection'] != 'close'
-            content_length = parseInt(parseInt(response.headers['content-length']) / 1024)
-
-            if content_length > 500 || @exclude_process.indexOf(link.extension()) > -1
-              ll.log "Too Large #{link.url} - #{content_length}Kb", LinkLogger.LOG_INFO
-              
-              @remove_from_queue link
+          @handle_page_response link, error, response, body
       }
 
       link.request = request request_o, (error, response, body) =>
-        if !error && response.statusCode == 200
-          link.code = response.statusCode
-
-          if link.valid_process_link(@base) # only process page when valid hostname
-            @process_dom_page link, body
-          else
-            @remove_from_queue link
-        else
-          link.code = response.statusCode if !error
-          link.error = error if error
-
-          ll.log "#{link.code} at #{link.to_string()}", LinkLogger.LOG_CRITICAL
-          ll.log error, LinkLogger.LOG_CRITICAL
-
-          @errored.push link
-          @remove_from_queue link
-
+        @handle_page_requested link, error, response, body
     catch error
       ll.log "****************************** (request)", LinkLogger.LOG_WARNING
       ll.log err, LinkLogger.LOG_WARNING
       ll.log "Request error for #{link.url}", LinkLogger.LOG_WARNING
+
+  ###
+  Handle the first response of a requested page
+  ###
+  handle_page_response: (link, error, response, body) ->
+    if !error && response.headers['connection'] != 'close'
+      content_length = parseInt(parseInt(response.headers['content-length']) / 1024)
+
+      if content_length > 500 || @exclude_process.indexOf(link.extension()) > -1
+        ll.log "Too Large #{link.url} - #{content_length}Kb", LinkLogger.LOG_INFO
+        
+        @remove_from_queue link
+
+  ###
+  Handle the requested page when downloaded
+  ###
+  handle_page_requested: (link, error, response, body) ->
+    if !error && response.statusCode == 200
+      link.code = response.statusCode
+
+      if link.valid_process_link() # only process page when valid hostname
+        @process_dom_page link, body
+      else
+        @remove_from_queue link
+    else
+      link.code = response.statusCode if !error
+      link.error = error if error
+
+      ll.log "#{link.code} at #{link.to_string()}", LinkLogger.LOG_CRITICAL
+      ll.log error, LinkLogger.LOG_CRITICAL
+
+      @errored.push link
+      @remove_from_queue link
 
   ###
   Process DOM of fetched page
@@ -181,21 +194,18 @@ root.LinkChecker = class LinkChecker
 
     clearInterval @end_interval
     @finished = true
+    retries = []
 
-    if @errored.length > 0 && @try <= LinkChecker.MAX_RETRIES
-      retries = []
+    for link in @errored
+      retries.push(@queue link) if link.code >= 500
 
-      for link in @errored
-        retries.push(@queue link) if link.code >= 500
+    if retries.length > 0 && @try <= LinkChecker.MAX_RETRIES
+      ll.log "Retrying for #{@errored.length} links", LinkLogger.INFO
 
-      if retries.length > 0
-        ll.log "Retrying for #{@errored.length} links", LinkLogger.INFO
-
-        @try++
-        @finished = false
-      else
-        @callback(@errored)
+      @try++
+      @finished = false
     else
+      
       @callback(@errored)
 
 ###
@@ -203,19 +213,30 @@ Run function for standalone use
 ###
 root.run = ->
   package = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json')))
+  time_start = null
 
   p
     .version("#{package.name} #{package.version}")
     .option('-u, --url [url]', 'URL to check')
     .option('-f, --full', 'Full output, default is only http codes >= 400')
     .option('-p, --piped', 'Piped output, default is json')
+    .option('-t, --timed', 'Time the duration of the process')
     .option('-v, --verbose', 'Verbose')
     .parse(process.argv)
 
   process.title = package.name
 
+  process.on 'uncaughtException', (err) ->
+    console.error('uncaughtexception:' + err.stack)
+
+  process.on 'exit', (err) ->
+    console.error('exit:' + err.stack)
+
   lc = new LinkChecker(p.url)
   lc.verbose p.verbose
+
+  if p.timed
+    time_start = new Date().getTime()
 
   try
     lc.start (errors) ->
@@ -225,15 +246,16 @@ root.run = ->
             console.log error.piped_output()
           else
             console.log error
+
         else if error.is_error()
           if p.piped
             console.log error.piped_output()
           else
             console.log error
+      
+      if p.timed
+        console.log "\nDuration: " + ((new Date().getTime() - time_start) / 1000).toFixed() + "s"
 
-      process.exit(1)
+      process.exit(0)
   catch error
     console.log error
-
-# process.on 'uncaughtException', (err) ->
-#   console.error('uncaughtexception:' + err.stack)

@@ -9,7 +9,10 @@ root.Link = class Link
   @REGEX_URL = /(http|https):\/\/([a-zA-Z0-9.]|%[0-9A-Za-z]|\/|:[0-9]?)*/
 
   constructor: (@parent, @url, @base, @code = -1) ->
+    throw new Error("Invalid or insufficient arguments given.") unless @parent? || @url? || @base?
+
     @url = u.resolve(@base, @url) if @url.indexOf('http') < 0
+    @parent = "#{@parent}/" if @parent[@parent.length - 1] != '/'
 
     @request = null
     @error = null
@@ -26,12 +29,12 @@ root.Link = class Link
   Base on hostname, we don't want to go outside given domain
   We don't want to check the internetz
   ###
-  valid_process_link: (base) ->
+  valid_process_link: () ->
     valid = true
 
     @init_url_parser()
 
-    if @u.hostname != u.parse(base).hostname # only links on same host
+    if @u.hostname != u.parse(@base).hostname # only links on same host
       valid = false
 
     valid

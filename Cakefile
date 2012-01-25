@@ -33,6 +33,22 @@ task 'test', 'build and test', (options) ->
 
   options.url or= 'http://www.whatsnextmagazine.net'
 
-  lc = exec "./bin/link-checker -v -u #{options.url}"
+  lc = exec "./bin/link-checker -v -t -u #{options.url}"
+  lc.stdout.pipe process.stdout
+  lc.stderr.pipe process.stderr
+
+jasmine_options = '--verbose --coffee'
+
+task 'spec', 'spec with jasmine-node', (options) ->
+  console.log '$ Specs Run'
+
+  lc = exec "./node_modules/jasmine-node/bin/jasmine-node #{jasmine_options} ./spec/"
+  lc.stdout.pipe process.stdout
+  lc.stderr.pipe process.stderr
+
+task 'spec-auto', 'autotest spec with jasmine-node', (options) ->
+  console.log '$ Specs Run'
+
+  lc = exec "./node_modules/jasmine-node/bin/jasmine-node --autotest #{jasmine_options} ./spec/"
   lc.stdout.pipe process.stdout
   lc.stderr.pipe process.stderr
